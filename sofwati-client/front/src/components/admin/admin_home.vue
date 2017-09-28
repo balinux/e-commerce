@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" @click.prevent="addBarang" class="btn btn-primary">Save</button>
+                                    <button type="submit" @click.prevent="addBarang" data-dismiss="modal" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" @click.prevent="editBarang(list.id)" class="btn btn-primary">Save</button>
+                                    <button type="submit" @click.prevent="editBarang(list.id)" data-dismiss="modal" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,8 @@
                 if (ok) {
                     this.$http.put('http://localhost:8000/api/barang/update/'+listId, this.barangData)
                         .then(response=>{
-                            this.loadIt()
+                            this.loadIt(),
+                            this.barangData = " " 
                         })
                 }
             },
@@ -117,7 +118,8 @@
                 this.$http.post('http://localhost:8000/api/barang', this.barangData)
                     .then(response => {
                         this.barangData = ""
-                        this.loadIt();
+                        this.loadIt(),
+                        this.barangData = " "
                     })
             },
             loadIt() {
